@@ -1,4 +1,6 @@
 var apiKey = '94e5456c3d04b880e4753e8fde1884d6'
+var btn = document.querySelector("#btn-search");
+var containerPreviousSerches = document.querySelector("#previous-searches");
 
 function renderElements(cityName, weatherData) {
     // create a title with city name
@@ -29,3 +31,28 @@ function getWeatherByCity(cityName) {
 }
 
 getWeatherByCity('Milwaukee')
+
+
+
+// function listener on click button
+var search = function(event){
+    event.preventDefault();
+    var inputElement = document.querySelector("#search-city");
+    var textInput = inputElement.value.trim();
+    if(inputElement.value === ""){
+        alert("Please enter a valid city");
+        return;
+    }
+    else{
+        console.log(textInput);
+        // call function for api response
+        callApiFetch(textInput);
+
+    }
+
+};
+
+
+
+// Add event listener to Searching button 
+btn.addEventListener("click", search);
