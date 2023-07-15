@@ -19,26 +19,29 @@
     </div>
         <!-- Main Section Container-->
         <div class="container-fluid">
-            <!-- 1 Row-->
-            <div class="row">
-                <div class="col-3 bg-light border-1">
-                    <div class=" headerSearch mx-1 my-3 mb-0 row">
-                        <h3>Search for a City:</h3>
-                    </div>                
-                    <div class="formInput m-3 row">
-                        <input class="border mb-3" type="text" id="search-city"/>
-                        <button type="button" class="btn btn-primary btn-md border-0" id="btn-search">Search</button>
-                    </div>
-                    <div class="row m-3" id="previous-serches"></div>
+        <!-- 1 Row-->
+        <div class="row">
+            <div class="col-3 bg-light border-1">
+                <div class=" headerSearch mx-1 my-3 mb-0 row">
+                    <h3>Search for a City:</h3>
+                </div>                
+                <div class="formInput m-3 row">
+                    <input class="border mb-3" type="text" id="search-city"/>
+                    <button type="button" class="btn btn-primary btn-md border-0" id="btn-search">Search</button>
                 </div>
-                <div class="col-9 border ">
-                    <div class="row border m-3" id="target-city">City</div>
-                    <div class="row m-3" id="info-city">Info</div>
-                </div>
+                <div class="row m-3" id="previous-serches"></div>
             </div>
+            <div class="col-9 border current-search">
+                <div class="row m-3 h3" id="target-city"></div>
+                <div class="row m-3" id="info-city"></div>
+            </div>
+        </div>
     <!-- Bootstrap -->   
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Day.js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
     <!-- Custom -->
     <script src="assets/js/script.js"></script>
+
 </body>
 </html>
