@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Custom -->
     <link rel="stylesheet" href="assets/css/style.css"/>
-
     <title>Weather Dashboard</title>
 </head>
 <body>
@@ -19,7 +18,7 @@
         </div>
     </div>
     <!-- Main Section Container-->
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
 
             <div class="col-3 bg-light border-1">
@@ -41,54 +40,10 @@
                 <div class="row m-3" id="current-date"> </div>
                 <div class="row m-3" id="info-city"></div>
                 <div class="row">
-
-                    <div class="col-9 bg-dark pb-4" id="five-day-forecast"> 
+                    <div class="col bg-dark pb-4" id="five-day-forecast">
                         <h3 class="mx-3 my-3 text-white bg-dark five-day">5-Day Forecast</h3>
-                        <div class="row mx-2">
-            
-                            <div class="card bg-light col-2 mx-1">
-                                <div class="card-body bg-light px-0 py-2">
-                                <h5 class="card-title">Date</h5>
-                                <p class="card-text mb-2">Temp: </p>
-                                <p class="card-text mb-2">Wind: </p>
-                                <p class="card-text mb-2">Humidity: </p>
-                                </div>
-                            </div>
-                            <div class="card bg-light col-2 mx-1">
-                                <div class="card-body bg-light px-0 py-2">
-                                <h5 class="card-title">Date</h5>
-                                <p class="card-text mb-2">Temp: </p>
-                                <p class="card-text mb-2">Wind: </p>
-                                <p class="card-text mb-2">Humidity: </p>
-                                </div>
-                            </div>
-                            <div class="card bg-light col-2 mx-1">
-                                <div class="card-body bg-light px-0 py-2">
-                                <h5 class="card-title">Date</h5>
-                                <p class="card-text mb-2">Temp: </p>
-                                <p class="card-text mb-2">Wind: </p>
-                                <p class="card-text mb-2">Humidity: </p>
-                                </div>
-                            </div>
-                            <div class="card bg-light col-2 mx-1">
-                                <div class="card-body bg-light px-0 py-2">
-                                <h5 class="card-title">Date</h5>
-                                <p class="card-text mb-2">Temp: </p>
-                                <p class="card-text mb-2">Wind: </p>
-                                <p class="card-text mb-2">Humidity: </p>
-                                </div>
-                            </div>
-                            <div class="card bg-light col-2 mx-1">
-                                <div class="card-body bg-light px-0 py-2">
-                                <h5 class="card-title">Date</h5>
-                                <p class="card-text mb-2">Temp: </p>
-                                <p class="card-text mb-2">Wind: </p>
-                                <p class="card-text mb-2">Humidity: </p>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+                        <div class="row mx-2" id="forecast-cards"></div>
+                      </div>
                 </div>                    
             </div>
         </div>

@@ -12,6 +12,8 @@ var containerForecast = document.querySelector("#info-city");
 
 var searchHistoryList = document.querySelector("#search-history");
 
+var forecastCardsContainer = document.querySelector('#five-day-forecast .row')
+
 function renderElements(cityName, weatherData) {
     // Clear any existing content
     containerCity.innerHTML = "";
@@ -30,6 +32,7 @@ function renderElements(cityName, weatherData) {
     var icon = document.createElement('img');
     icon.src = "http://openweathermap.org/img/w/" + weatherData.weather[0].icon + ".png";
     icon.alt = weatherData.weather[0].description;
+    icon.classList.add('img-fluid')
 
     // Create a paragraph for the date
     var dateParagraph = document.createElement('p');
@@ -59,7 +62,7 @@ function renderElements(cityName, weatherData) {
     containerForecast.appendChild(ul);
 }
 
-getWeatherByCity("Milwaukee")
+// getWeatherByCity("Milwaukee")
 
 function getWeatherByCity(cityName) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey)
@@ -67,13 +70,11 @@ function getWeatherByCity(cityName) {
         return response.json()
     })
     .then(function(weatherData) {
-        renderElements(cityName, weatherData)
-        console.log(weatherData)
-        var fiveDayForcast = ""
+        renderElements(cityName, weatherData);
+        console.log(weatherData);
 
-        for (var i = 0; i < weatherData.list.length; i++)
-            console.log(weatherData.list[i].dt_txt)
-    })
+        weatherForecast(cityName); // Call the weather forecast function here
+    });
 }
 
 function weatherForecast(cityName) {
@@ -83,12 +84,49 @@ function weatherForecast(cityName) {
     })
     .then(function(weatherData) {
         console.log(JSON.stringify(weatherData))
-        // renderWeather(data)
+        forecastCardsContainer.innerHTML = ''; // Clear existing forecast cards
+
+        for (var i = 0; i < weatherData.list.length; i++) {
+            var forecast = weatherData.list[i];
+        
+            var card = document.createElement('div');
+            card.classList.add('card', 'bg-light', 'col-2', 'mx-1');
+            card.style.width = '7rem';
+        
+            var cardBody = document.createElement('div');
+            cardBody.classList.add('card-body', 'bg-light', 'px-0', 'py-2');
+        
+            var title = document.createElement('h5');
+            title.classList.add('card-title');
+            title.innerText = forecast.dt_txt;
+        
+            var temperature = document.createElement('p');
+            temperature.classList.add('card-text', 'mb-2');
+            temperature.innerText = 'Temp: ' + forecast.main.temp + '°F';
+        
+            var wind = document.createElement('p');
+            wind.classList.add('card-text', 'mb-2');
+            wind.innerText = 'Wind: ' + forecast.wind.speed + 'mph';
+        
+            var humidity = document.createElement('p');
+            humidity.classList.add('card-text', 'mb-2');
+            humidity.innerText = 'Humidity: ' + forecast.main.humidity + '%';
+        
+            cardBody.appendChild(title);
+            cardBody.appendChild(temperature);
+            cardBody.appendChild(wind);
+            cardBody.appendChild(humidity);
+        
+            card.appendChild(cardBody);
+        
+            forecastCardsContainer.appendChild(card);
+        }
     })
     .catch(function() {
         console.error('Error fetching data')
     })
 }
+
 
 
 
