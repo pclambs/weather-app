@@ -78,7 +78,7 @@ function getWeatherByCity(cityName) {
 }
 
 function weatherForecast(cityName) {
-    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=imperial&appid=' + apiKey + '&cnt=5')
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=imperial&appid=' + apiKey + '&cnt=40')
     .then(function(response) {
         return response.json()
     })
@@ -86,45 +86,56 @@ function weatherForecast(cityName) {
         console.log(JSON.stringify(weatherData))
         forecastCardsContainer.innerHTML = ''; // Clear existing forecast cards
 
-        for (var i = 0; i < weatherData.list.length; i++) {
-            var forecast = weatherData.list[i];
-        
-            var card = document.createElement('div');
-            card.classList.add('card', 'bg-light', 'col-2', 'mx-1');
-            card.style.width = '7rem';
-        
-            var cardBody = document.createElement('div');
-            cardBody.classList.add('card-body', 'bg-light', 'px-0', 'py-2');
-        
-            var title = document.createElement('h5');
-            title.classList.add('card-title');
-            title.innerText = forecast.dt_txt;
-        
-            var temperature = document.createElement('p');
-            temperature.classList.add('card-text', 'mb-2');
-            temperature.innerText = 'Temp: ' + forecast.main.temp + '°F';
-        
-            var wind = document.createElement('p');
-            wind.classList.add('card-text', 'mb-2');
-            wind.innerText = 'Wind: ' + forecast.wind.speed + 'mph';
-        
-            var humidity = document.createElement('p');
-            humidity.classList.add('card-text', 'mb-2');
-            humidity.innerText = 'Humidity: ' + forecast.main.humidity + '%';
-        
-            cardBody.appendChild(title);
-            cardBody.appendChild(temperature);
-            cardBody.appendChild(wind);
-            cardBody.appendChild(humidity);
-        
-            card.appendChild(cardBody);
-        
-            forecastCardsContainer.appendChild(card);
+        var forecasts = weatherData.list;
+        var count = 0;
+
+        for (var i = 0; i < forecasts.length; i++) {
+            var forecast = forecasts[i];
+
+            // Check if the forecast time is 12:00 pm
+            if (forecast.dt_txt.includes('12:00:00')) {
+                if (count >= 5) {
+                    break; // Exit the loop after 5 forecasts
+                }
+
+                var card = document.createElement('div');
+                card.classList.add('card', 'bg-light', 'col-2', 'mx-1');
+                card.style.width = '7rem';
+
+                var cardBody = document.createElement('div');
+                cardBody.classList.add('card-body', 'bg-light', 'px-0', 'py-2');
+
+                var title = document.createElement('h5');
+                title.classList.add('card-title');
+                title.innerText = forecast.dt_txt.substr(0, 10); // Extract only the date
+
+                var temperature = document.createElement('p');
+                temperature.classList.add('card-text', 'mb-2');
+                temperature.innerText = 'Temp: ' + forecast.main.temp + '°F';
+
+                var wind = document.createElement('p');
+                wind.classList.add('card-text', 'mb-2');
+                wind.innerText = 'Wind: ' + forecast.wind.speed + 'mph';
+
+                var humidity = document.createElement('p');
+                humidity.classList.add('card-text', 'mb-2');
+                humidity.innerText = 'Humidity: ' + forecast.main.humidity + '%';
+
+                cardBody.appendChild(title);
+                cardBody.appendChild(temperature);
+                cardBody.appendChild(wind);
+                cardBody.appendChild(humidity);
+
+                card.appendChild(cardBody);
+
+                forecastCardsContainer.appendChild(card);
+                count++;
+            }
         }
     })
     .catch(function() {
-        console.error('Error fetching data')
-    })
+        console.error('Error fetching data');
+    });
 }
 
 
