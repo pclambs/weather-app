@@ -10,6 +10,8 @@ var containerDate = document.querySelector('#current-date')
 
 var containerForecast = document.querySelector("#info-city");
 
+var searchHistoryList = document.querySelector("#search-history");
+
 function renderElements(cityName, weatherData) {
     // Clear any existing content
     containerCity.innerHTML = "";
@@ -37,19 +39,13 @@ function renderElements(cityName, weatherData) {
     // Create an unordered list to display weather information
     var ul = document.createElement('ul');
     var li1 = document.createElement('li');
-    // var li2 = document.createElement('li');
-    // var li3 = document.createElement('li');
     var li4 = document.createElement('li');
     var li5 = document.createElement('li');
-    li1.innerText = "Temp: " + weatherData.main.temp + '°F';
-    // li2.innerText = "H: " + weatherData.main.temp_max + '°F';
-    // li3.innerText = "L: " + weatherData.main.temp_min + '°F';
+    li1.innerText = "Temperature: " + weatherData.main.temp + '°F';
     li4.innerText = "Wind: " + weatherData.wind.speed + 'mph';
     li5.innerText = "Humidity: " + weatherData.main.humidity + '%';
 
     ul.appendChild(li1);
-    // ul.appendChild(li2);
-    // ul.appendChild(li3);
     ul.appendChild(li4);
     ul.appendChild(li5);
 
@@ -73,24 +69,54 @@ function getWeatherByCity(cityName) {
     .then(function(weatherData) {
         renderElements(cityName, weatherData)
         console.log(weatherData)
+        var fiveDayForcast = ""
+
+        for (var i = 0; i < weatherData.list.length; i++)
+            console.log(weatherData.list[i].dt_txt)
     })
 }
 
+function weatherForecast(cityName) {
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=imperial&appid=' + apiKey + '&cnt=5')
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(weatherData) {
+        console.log(JSON.stringify(weatherData))
+        // renderWeather(data)
+    })
+    .catch(function() {
+        console.error('Error fetching data')
+    })
+}
+
+
+
 // function listener on click button
 var search = function(event){
-    event.preventDefault();
-    var inputElement = document.querySelector("#search-city");
-    var textInput = inputElement.value.trim();
+    event.preventDefault()
+    var inputElement = document.querySelector("#search-city")
+    var textInput = inputElement.value.trim()
     if(inputElement.value === ""){
-        alert("Please enter a valid city");
-        return;
+        alert("Please enter a valid city")
+        return
     }
     else{
-        console.log(textInput);
+        console.log(textInput)
         // call function for api response
-        getWeatherByCity(textInput);
+        getWeatherByCity(textInput)
+
+        // Create a new list item
+        var listItem = document.createElement('li')
+        listItem.textContent = textInput
+        listItem.classList.add('btn', 'btn-secondary', 'mx-3','mt-3','mb-0')
+        searchHistoryList.appendChild(listItem)
+
+        listItem.addEventListener('click', function() {
+            getWeatherByCity(textInput)
+        })
     }
 };
 
 // Add event listener to Searching button 
-btn.addEventListener("click", search);
+btn.addEventListener("click", search)

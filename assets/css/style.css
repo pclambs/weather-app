@@ -2,19 +2,16 @@
     margin: 0;
     padding: 0;
     display: flex;
-    white-space: nowrap;
-
 }
   
 #target-city h2 {
     margin: 0;
     padding: 0;
-    margin-right: 10px;
 }
   
 #target-city img {
     width: 1.2em; /* Adjust the width as desired */
-
+    padding-left: .5rem;
 }
 
 #current-date p {
@@ -29,4 +26,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
+}
+
+.five-day {
+    width: 12rem;
 }
