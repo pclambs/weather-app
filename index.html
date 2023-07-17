@@ -43,25 +43,30 @@
                 <!-- Seach History Section-->
                 <div class="bg-light mx-3 mb-3 row">
                     <ul class="list-group list-group-flush px-0" id="search-history"></ul>
-                    <button type="button" class="btn btn-primary mt-3" id="clear-history">Clear History</button>
+                    <button type="button" class="btn btn-primary mt-3 mb-2" id="clear-history">Clear History</button>
                 </div>  
 
             </div>   
 
-            <div class="col-9 current-search">
+            <div class="col-9 current-search" id="current-search">
 
-                <!-- Current Conditions Section -->
-                <div class="row m-3 h3" id="target-city"></div>
-                <div class="row m-3" id="current-date"> </div>
-                <div class="row m-3" id="info-city"></div>
+                <div class="container-fluid px-0">
 
-                <!-- 5-Day Forecast Section -->
-                <div class="row">
-                    <div class="col bg-dark pb-4" id="five-day-forecast">
-                        <h3 class="mx-3 my-3 text-white bg-dark five-day">5-Day Forecast</h3>
-                        <div class="row mx-2" id="forecast-cards"></div>
-                    </div>
-                </div>       
+                    <!-- Current Conditions Section -->
+                    <div class="row m-3 h3" id="target-city"></div>
+                    <div class="row m-3" id="current-date"> </div>
+                    <div class="row m-3" id="info-city"></div>
+    
+                    <!-- 5-Day Forecast Section -->
+                    <div class="row">
+                        <div class="col bg-dark pb-4" id="five-day-forecast">
+                            <h3 class="mx-3 my-3 text-white bg-dark five-day">5-Day Forecast</h3>
+                            <div class="row mx-3" id="forecast-cards"></div>
+                        </div>
+                    </div>       
+
+                </div>
+
 
             </div>
             

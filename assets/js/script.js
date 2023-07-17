@@ -101,7 +101,7 @@ function weatherForecast(cityName) {
                 }
 
                 var card = document.createElement('div');
-                card.classList.add('card', 'bg-light', 'col-2', 'mx-1', 'w-20');
+                card.classList.add('card', 'bg-light', 'col-2', 'me-3', 'w-20');
 
                 var cardBody = document.createElement('div');
                 cardBody.classList.add('card-body', 'bg-light', 'px-0', 'py-2');
@@ -152,16 +152,22 @@ var search = function(event) {
     event.preventDefault();
     var inputElement = document.querySelector("#search-city");
     var textInput = inputElement.value.trim();
-    if (textInput === "") {
+
+    // Capitalize the first letter of each word
+    var city = textInput.toLowerCase().replace(/(^|\s)\S/g, function(char) {
+        return char.toUpperCase();
+    });
+
+    if (city === "") {
         alert("Please enter a valid city");
         return;
     } else {
-        console.log(textInput);
+        console.log(city);
         // Call function for API response
-        getWeatherByCity(textInput);
+        getWeatherByCity(city);
         
         // Add the searched city to the search history array
-        searchHistory.push(textInput);
+        searchHistory.push(city);
         
         // Limit the search history to a maximum of 5 entries
         if (searchHistory.length > 5) {
