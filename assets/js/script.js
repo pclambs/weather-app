@@ -61,11 +61,10 @@ function renderElements(cityName, weatherData) {
     // Append the elements to the DOM
     containerCity.appendChild(container);
     containerDate.appendChild(dateParagraph);
-    containerForecast.appendChild(ul);
-
-    
-    
+    containerForecast.appendChild(ul);   
 }
+
+// getWeatherByCity("Milwaukee")
 
 function getWeatherByCity(cityName) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey)
@@ -162,13 +161,14 @@ var search = function(event) {
         if (searchHistory.length > 5) {
             searchHistory = searchHistory.slice(-5); // Get the last 5 entries
         }
-        
+        // Reverse the search history array
+        searchHistory.reverse();
         // Store the search history array in local storage
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory.reverse()));
 
         // Clear and repopulate the search history list
         searchHistoryList.innerHTML = "";
-        searchHistory.forEach(function(city) {
+        searchHistory.reverse().forEach(function(city) {
             var listItem = document.createElement("li");
             listItem.textContent = city;
         listItem.classList.add("btn", "btn-secondary", "mt-3", "mb-0");
@@ -187,13 +187,36 @@ var search = function(event) {
 }
 };
 
-var clearHistoryButton = document.querySelector("#clear-history");
 
-// Check if there is search history in local storage
-if (localStorage.getItem("searchHistory")) {
-    clearHistoryButton.style.display = "block"; // Display the clear history button
+
+
+var clearHistoryButton = document.querySelector("#clear-history")
+
+// // Retrieve search history from local storage
+var storedSearchHistory = localStorage.getItem("searchHistory");
+if (storedSearchHistory) {
+    searchHistory = JSON.parse(storedSearchHistory);
+
+    // Reverse the search history array
+    searchHistory.reverse();
+
+    // Populate the search history list
+    searchHistory.forEach(function (city) {
+        var listItem = document.createElement("li");
+        listItem.textContent = city;
+        listItem.classList.add("btn", "btn-secondary", "mt-3", "mb-0");
+        searchHistoryList.appendChild(listItem);
+
+        listItem.addEventListener("click", function () {
+            getWeatherByCity(city);
+        });
+    });
+
+    // Display the clear history button
+    clearHistoryButton.style.display = "block";
 } else {
-    clearHistoryButton.style.display = "none"; // Hide the clear history button
+    // Hide the clear history button
+    clearHistoryButton.style.display = "none";
 }
 
 // Function to handle clearing of search history
@@ -202,11 +225,12 @@ var clearHistory = function() {
     localStorage.removeItem("searchHistory"); // Remove the search history from local storage
     searchHistoryList.innerHTML = ""; // Clear the search history list
     clearHistoryButton.style.display = "none"; // Hide the clear history button
-};
+}
 
 // Check if there is search history in local storage
 if (localStorage.getItem("searchHistory")) {
-    clearHistoryButton.style.display = "block"; // Display the clear history button
+    clearHistoryButton.style.display = "block";
+    // Display the clear history button
 } else {
     clearHistoryButton.style.display = "none"; // Hide the clear history button
 }

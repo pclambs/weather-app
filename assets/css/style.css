@@ -35,3 +35,7 @@
 .card-body > p.card-text:last-child {
     margin-bottom: 0;
 }
+
+.line {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.318);
+}
