@@ -4,14 +4,18 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- Custom -->
     <link rel="stylesheet" href="assets/css/style.css"/>
+
     <title>Weather Dashboard</title>
 
 </head>
 <body>
+
+    <!-- Top Bar Section -->
     <div class="justify-content-center bg-dark text-white mx-0 px-1">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12">
@@ -19,11 +23,14 @@
             </div>
         </div>
     </div>
+
     <!-- Main Section Container-->
     <div class="container">
         <div class="row">
 
             <div class="col-3 bg-light border-1">
+
+                <!-- Search Section -->
                 <div class=" headerSearch mx-1 my-3 mb-0 row">
                     <h3 class="mb-0">Search for a City:</h3>
                 </div>                
@@ -32,28 +39,35 @@
                     <button type="button" class="btn btn-primary " id="btn-search">Search</button>
                 </div>
                 <div class="line mx-3"></div>
-                <!-- Seach History -->
+
+                <!-- Seach History Section-->
                 <div class="bg-light mx-3 mb-3 row">
                     <ul class="list-group list-group-flush px-0" id="search-history"></ul>
                     <button type="button" class="btn btn-primary mt-3" id="clear-history">Clear History</button>
-                </div>
-                
+                </div>  
+
             </div>   
 
             <div class="col-9 current-search">
+
+                <!-- Current Conditions Section -->
                 <div class="row m-3 h3" id="target-city"></div>
                 <div class="row m-3" id="current-date"> </div>
                 <div class="row m-3" id="info-city"></div>
+
+                <!-- 5-Day Forecast Section -->
                 <div class="row">
                     <div class="col bg-dark pb-4" id="five-day-forecast">
                         <h3 class="mx-3 my-3 text-white bg-dark five-day">5-Day Forecast</h3>
                         <div class="row mx-2" id="forecast-cards"></div>
-                      </div>
-                </div>                    
+                    </div>
+                </div>       
+
             </div>
             
         </div>
     </div>
+
     <!-- Bootstrap -->   
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <!-- Day.js -->

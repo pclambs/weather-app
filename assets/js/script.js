@@ -82,10 +82,10 @@ function getWeatherByCity(cityName) {
 function weatherForecast(cityName) {
     fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + cityName + '&units=imperial&appid=' + apiKey + '&cnt=40')
     .then(function(response) {
-        return response.json()
+        return response.json();
     })
     .then(function(weatherData) {
-        console.log(JSON.stringify(weatherData))
+        console.log(JSON.stringify(weatherData));
         forecastCardsContainer.innerHTML = ''; // Clear existing forecast cards
 
         var forecasts = weatherData.list;
@@ -101,8 +101,7 @@ function weatherForecast(cityName) {
                 }
 
                 var card = document.createElement('div');
-                card.classList.add('card', 'bg-light', 'col-2', 'mx-1');
-                card.style.width = '7rem';
+                card.classList.add('card', 'bg-light', 'col-2', 'mx-1', 'w-20');
 
                 var cardBody = document.createElement('div');
                 cardBody.classList.add('card-body', 'bg-light', 'px-0', 'py-2');
@@ -110,6 +109,12 @@ function weatherForecast(cityName) {
                 var title = document.createElement('h5');
                 title.classList.add('card-title');
                 title.innerText = forecast.dt_txt.substr(0, 10); // Extract only the date
+
+                var icon = document.createElement('img');
+                icon.src = "http://openweathermap.org/img/w/" + forecast.weather[0].icon + ".png";
+                icon.alt = forecast.weather[0].description;
+                icon.classList.add('img-fluid');
+                icon.style.width = '100px';
 
                 var temperature = document.createElement('p');
                 temperature.classList.add('card-text', 'mb-2');
@@ -124,6 +129,7 @@ function weatherForecast(cityName) {
                 humidity.innerText = 'Humidity: ' + forecast.main.humidity + '%';
 
                 cardBody.appendChild(title);
+                cardBody.appendChild(icon);
                 cardBody.appendChild(temperature);
                 cardBody.appendChild(wind);
                 cardBody.appendChild(humidity);
@@ -135,8 +141,8 @@ function weatherForecast(cityName) {
             }
         }
     })
-    .catch(function() {
-        console.error('Error fetching data');
+    .catch(function(error) {
+        console.error('Error fetching data:', error);
     });
 }
 
