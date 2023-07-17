@@ -36,19 +36,48 @@
     margin: 0;
     padding: 0;
 }
+/* 
+#current-search {
+    width: 40vw;
+} */
 
+.fixed {
+    width: 216px;
+}
+
+/* five-day forecast title div */
 .five-day {
     width: 12rem;
 }
-
+/* line that separates search input from history section */
 .line {
     border-bottom: 1px solid rgba(128, 128, 128, 0.318);
 }
 
 .current-search .card-title {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .current-search .card-text {
   font-size: 1rem; 
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }

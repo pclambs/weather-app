@@ -22,7 +22,7 @@ function renderElements(cityName, weatherData) {
     containerDate.innerHTML = "";
     containerForecast.innerHTML = "";
 
-        // Create a container for the city name and icon
+    // Create a container for the city name and icon
     var container = document.createElement('div');
     container.id = 'city-info';
 
@@ -108,7 +108,13 @@ function weatherForecast(cityName) {
 
                 var title = document.createElement('h5');
                 title.classList.add('card-title');
-                title.innerText = forecast.dt_txt.substr(0, 10); // Extract only the date
+
+                // Format date
+                var date = new Date(forecast.dt_txt).toLocaleDateString(undefined, {
+                    month: 'long',
+                    day: 'numeric'
+                })
+                title.innerText = date;
 
                 var icon = document.createElement('img');
                 icon.src = "http://openweathermap.org/img/w/" + forecast.weather[0].icon + ".png";
