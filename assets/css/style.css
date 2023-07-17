@@ -31,3 +31,7 @@
 .five-day {
     width: 12rem;
 }
+
+.card-body > p.card-text:last-child {
+    margin-bottom: 0;
+}

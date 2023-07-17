@@ -12,6 +12,8 @@ var containerForecast = document.querySelector("#info-city");
 
 var searchHistoryList = document.querySelector("#search-history");
 
+var searchHistory = [];
+
 var forecastCardsContainer = document.querySelector('#five-day-forecast .row')
 
 function renderElements(cityName, weatherData) {
@@ -60,9 +62,10 @@ function renderElements(cityName, weatherData) {
     containerCity.appendChild(container);
     containerDate.appendChild(dateParagraph);
     containerForecast.appendChild(ul);
-}
 
-// getWeatherByCity("Milwaukee")
+    
+    
+}
 
 function getWeatherByCity(cityName) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=' + apiKey)
@@ -139,33 +142,77 @@ function weatherForecast(cityName) {
 }
 
 
+// Function to handle search
+var search = function(event) {
+    event.preventDefault();
+    var inputElement = document.querySelector("#search-city");
+    var textInput = inputElement.value.trim();
+    if (textInput === "") {
+        alert("Please enter a valid city");
+        return;
+    } else {
+        console.log(textInput);
+        // Call function for API response
+        getWeatherByCity(textInput);
+        
+        // Add the searched city to the search history array
+        searchHistory.push(textInput);
+        
+        // Limit the search history to a maximum of 5 entries
+        if (searchHistory.length > 5) {
+            searchHistory = searchHistory.slice(-5); // Get the last 5 entries
+        }
+        
+        // Store the search history array in local storage
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
-
-// function listener on click button
-var search = function(event){
-    event.preventDefault()
-    var inputElement = document.querySelector("#search-city")
-    var textInput = inputElement.value.trim()
-    if(inputElement.value === ""){
-        alert("Please enter a valid city")
-        return
-    }
-    else{
-        console.log(textInput)
-        // call function for api response
-        getWeatherByCity(textInput)
-
-        // Create a new list item
-        var listItem = document.createElement('li')
-        listItem.textContent = textInput
-        listItem.classList.add('btn', 'btn-secondary', 'mx-3','mt-3','mb-0')
-        searchHistoryList.appendChild(listItem)
-
-        listItem.addEventListener('click', function() {
-            getWeatherByCity(textInput)
-        })
-    }
+        // Clear and repopulate the search history list
+        searchHistoryList.innerHTML = "";
+        searchHistory.forEach(function(city) {
+            var listItem = document.createElement("li");
+            listItem.textContent = city;
+        listItem.classList.add("btn", "btn-secondary", "mt-3", "mb-0");
+        searchHistoryList.appendChild(listItem);
+        
+        listItem.addEventListener("click", function() {
+            getWeatherByCity(city);
+            });
+        });
+        
+        if (searchHistory.length > 0) {
+            clearHistoryButton.style.display = "block"; // Display the clear history button
+        } else {
+            clearHistoryButton.style.display = "none"; // Hide the clear history button
+        }
+}
 };
 
-// Add event listener to Searching button 
-btn.addEventListener("click", search)
+var clearHistoryButton = document.querySelector("#clear-history");
+
+// Check if there is search history in local storage
+if (localStorage.getItem("searchHistory")) {
+    clearHistoryButton.style.display = "block"; // Display the clear history button
+} else {
+    clearHistoryButton.style.display = "none"; // Hide the clear history button
+}
+
+// Function to handle clearing of search history
+var clearHistory = function() {
+    searchHistory = []; // Clear the search history array
+    localStorage.removeItem("searchHistory"); // Remove the search history from local storage
+    searchHistoryList.innerHTML = ""; // Clear the search history list
+    clearHistoryButton.style.display = "none"; // Hide the clear history button
+};
+
+// Check if there is search history in local storage
+if (localStorage.getItem("searchHistory")) {
+    clearHistoryButton.style.display = "block"; // Display the clear history button
+} else {
+    clearHistoryButton.style.display = "none"; // Hide the clear history button
+}
+
+// event listener to clear history button
+clearHistoryButton.addEventListener("click", clearHistory);
+
+// event listener to search button
+btn.addEventListener("click", search);

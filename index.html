@@ -27,12 +27,14 @@
                 </div>                
                 <div class="formInput m-3 row">
                     <input class="border mb-3" type="text" id="search-city"/>
-                    <button type="button" class="btn btn-primary btn-md border-0" id="btn-search">Search</button>
+                    <button type="button" class="btn btn-primary " id="btn-search">Search</button>
                 </div>
                 <!-- Seach History -->
-                <div class="bg-light">
-                    <ul class="list-group list-group-flush" id="search-history"></ul>
+                <div class="bg-light m-3 row">
+                    <ul class="list-group list-group-flush px-0" id="search-history"></ul>
+                    <button type="button" class="btn btn-primary mt-3" id="clear-history">Clear History</button>
                 </div>
+                
             </div>   
 
             <div class="col-9 current-search">
@@ -46,14 +48,7 @@
                       </div>
                 </div>                    
             </div>
-        </div>
-        <div class="row">
-
-
-            <div >
-                <div class="col-2">
-                </div>
-                </div>
+            
         </div>
     </div>
     <!-- Bootstrap -->   
@@ -62,5 +57,6 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
     <!-- Custom -->
     <script src="assets/js/script.js"></script>
+
 </body>
 </html>
