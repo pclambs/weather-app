@@ -14,19 +14,24 @@
     padding: 0;
     display: flex;
 }
-  
+    
 #target-city h2 {
     margin: 0;
     padding: 0;
 }
-  
+    
 #target-city img {
     width: 1.2em;
+    height: 1.2em;
     padding-left: .5rem;
 }
 
+#current-date {
+    margin-bottom: 0;
+}
+
 #current-date p {
-    font-size: 1rem;
+    font-size: 1.2rem;
     margin: 0;
     padding: 0;
     color: grey;
@@ -40,8 +45,15 @@
 }
 
 /* search column */
-.fixed {
+.search-fixed {
     width: 216px;
+}
+
+/* current weather column */
+.current-fixed {
+    width: calc(70% - 216px);
+    flex: 1 0 auto;
+    margin-left: 3rem;
 }
 
 /* five-day forecast title div */
@@ -54,11 +66,16 @@
 }
 
 .current-search .card-title {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
 }
 
 .current-search .card-text {
-  font-size: 1rem; 
+    font-size: 1rem; 
+}
+
+#forecast-cards .card {
+    flex: 1 0 auto;
+    width: auto;
 }
 
 /* Small devices (landscape phones, 576px and up) */

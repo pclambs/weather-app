@@ -26,9 +26,9 @@
 
     <!-- Main Section Container-->
     <div class="container">
-        <div class="row">
+        <div class="d-flex flex-row">
 
-            <div class="fixed bg-light border-1">
+            <div class="search-fixed bg-light border-1">
 
                 <!-- Search Section -->
                 <div class=" headerSearch mx-1 my-3 mb-0 row">
@@ -48,15 +48,15 @@
 
             </div>   
 
-            <div class="col-9 current-search " id="current-search">
+            <div class="current-fixed current-search" id="current-search">
 
                 <div class="container-fluid px-0">
                     <div class="row">
                         <div class="col-lg-8 col-md-12">
 
                             <!-- Current Conditions Section -->
-                            <div class="row m-3 h3" id="target-city"></div>
-                            <div class="row m-3" id="current-date"> </div>
+                            <div class="row mt-3 ms-3 mb-0" id="current-date"> </div>
+                            <div class="row mt-1 ms-3 mb-4 h3" id="target-city"></div>
                             <div class="row m-3" id="info-city"></div>
                         
                         </div>
@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col bg-dark pb-4" id="five-day-forecast">
                                     <h3 class="mx-3 my-3 text-white bg-dark five-day">5-Day Forecast</h3>
-                                    <div class="row mx-3" id="forecast-cards"></div>
+                                    <div class="row ms-3 me-1" id="forecast-cards"></div>
                                 </div>
                             </div>       
 

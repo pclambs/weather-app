@@ -22,6 +22,15 @@ function renderElements(cityName, weatherData) {
     containerDate.innerHTML = "";
     containerForecast.innerHTML = "";
 
+    // Create a paragraph for the date
+    var dateParagraph = document.createElement('p');
+    var date = new Date(weatherData.dt).toLocaleDateString(undefined, {
+        month: 'long',
+        day: 'numeric',
+        time: 'short'
+    })
+    dateParagraph.innerText = date;
+
     // Create a container for the city name and icon
     var container = document.createElement('div');
     container.id = 'city-info';
@@ -36,10 +45,6 @@ function renderElements(cityName, weatherData) {
     icon.alt = weatherData.weather[0].description;
     icon.classList.add('img-fluid')
 
-    // Create a paragraph for the date
-    var dateParagraph = document.createElement('p');
-    var date = new Date(weatherData.dt * 1000).toLocaleDateString();
-    dateParagraph.innerText = date;
 
     // Create an unordered list to display weather information
     var ul = document.createElement('ul');
@@ -59,8 +64,8 @@ function renderElements(cityName, weatherData) {
     container.appendChild(icon);
 
     // Append the elements to the DOM
-    containerCity.appendChild(container);
     containerDate.appendChild(dateParagraph);
+    containerCity.appendChild(container);
     containerForecast.appendChild(ul);   
 }
 
@@ -85,7 +90,6 @@ function weatherForecast(cityName) {
         return response.json();
     })
     .then(function(weatherData) {
-        console.log(JSON.stringify(weatherData));
         forecastCardsContainer.innerHTML = ''; // Clear existing forecast cards
 
         var forecasts = weatherData.list;
